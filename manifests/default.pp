@@ -11,6 +11,8 @@ class lamp {
   package { "apache2.2-common": } 
   package { "mysql-server": }
   package { "php5-mysql": } 
+  package { "php5-xdebug": }
+  package { "php5-intl": }
 
   service { "apache2":
     ensure => running,
@@ -24,24 +26,30 @@ class lamp {
     require => Package["mysql-server"],
   }
 
-  file { '/var/www':
-    ensure => link,
-    target => "/vagrant",
-    notify => Service['apache2'],
-    force  => true
-  }
 }
 
 class php54 {
     package { 
-	"php5": ensure => pesent,
+	"php5": ensure => installed,
     }
 }
 
 class git {
     package {
-        "git": ensure => present,
+        "git": ensure => installed,
     }
+}
+
+class xdebug::debian {
+
+   include xdebug::params
+    
+    package { "xdebug":
+        name   => $xdebug::params::pkg,
+        ensure => installed,
+        require => Class['php54'],
+    }
+
 }
 
 include lamp
