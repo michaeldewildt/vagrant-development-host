@@ -13,6 +13,7 @@ class lamp {
   package { "php5-mysql": } 
   package { "php5-xdebug": }
   package { "php5-intl": }
+  package { "varnish": }
 
   service { "apache2":
     ensure => running,
@@ -38,18 +39,6 @@ class git {
     package {
         "git": ensure => installed,
     }
-}
-
-class xdebug::debian {
-
-   include xdebug::params
-    
-    package { "xdebug":
-        name   => $xdebug::params::pkg,
-        ensure => installed,
-        require => Class['php54'],
-    }
-
 }
 
 include lamp
