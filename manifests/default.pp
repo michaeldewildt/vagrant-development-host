@@ -17,13 +17,14 @@ file { "/home/example.com":
 class { 'apache': }
 apache::vhost { 'local.example.com':
     priority        => '10',
-    vhost_name      => '192.0.2.1',
+    vhost_name      => '10.0.2.15',
     port            => '80',
     docroot         => '/home/example.com/docroot/',
     logroot         => '/home/example.com/logroot/',
     serveradmin     => 'webmaster@example.com',
     serveraliases   => ['example.com',],
 }
+class {'apache::mod::php': }
 
 include mysql
 include php
