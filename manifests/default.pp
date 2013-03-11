@@ -9,6 +9,13 @@ Package { ensure => "installed" }
 
 package { "varnish": }
 package { "git": }
+package { "sqlite": }
+package { 'php5-sqlite': }
+package { 'memcached': }
+package { 'php5-memcached': }
+package { 'php5-mcrypt': }
+package { 'php5-imagick': }
+package { 'php-apc': }
 
 file { "/home/example.com":
     ensure => "directory",
