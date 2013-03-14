@@ -10,10 +10,6 @@ package { "sqlite": }
 package { 'memcached': }
 package { 'nginx': }
 
-file { "/home/local.example.com":
-    ensure => "directory",
-}
-
 file { "/etc/nginx/sites-available/local.example.com":
   content => template("nginx/local.example.com"),
 }
@@ -27,13 +23,10 @@ file { "/etc/nginx/sites-enabled/default":
   ensure => absent 
 }
 
-file { "/home/local.example.com/index.html":
-  content => template("nginx/index.html"),
-}
-
-file { "/home/local.example.com/index.php":
-  content => template("nginx/index.php"),
-}
+#Created by vagrant shared folder
+#file { "/home/local.example.com":
+#    ensure => "directory",
+#}
 
 service { "nginx":
   ensure => running,
