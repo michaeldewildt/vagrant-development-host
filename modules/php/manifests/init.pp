@@ -7,7 +7,12 @@ class php {
   package { "php5-mysql": } 
   package { "php5-xdebug": }
   package { "php5-intl": }
-
+  package { 'php5-sqlite': }
+  package { 'php5-memcached': }
+  package { 'php5-mcrypt': }
+  package { 'php5-imagick': }
+  package { 'php-apc': }
+  package { 'php5-fpm': }
 
 }
 
