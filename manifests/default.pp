@@ -27,5 +27,17 @@ file { "/etc/nginx/sites-enabled/default":
   ensure => absent 
 }
 
+file { "/home/local.example.com/index.html":
+  content => template("nginx/index.html"),
+}
+
+file { "/home/local.example.com/index.php":
+  content => template("nginx/index.php"),
+}
+
+service { "nginx":
+  ensure => running,
+}
+
 include mysql
 include php
