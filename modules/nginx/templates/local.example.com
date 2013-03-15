@@ -23,7 +23,7 @@ server {
 	# pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
 	#
         location ~ (app|app_dev).php {
-	        try_files $uri =404;
+	#       try_files $uri =404;
 		fastcgi_split_path_info ^(.+\.php)(/.+)$;
 		# NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
 	
