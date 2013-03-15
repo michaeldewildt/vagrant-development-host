@@ -43,3 +43,7 @@ service { "nginx":
 
 include mysql
 include php
+
+# TODO: set locale
+# locale-gen en_US en_US.UTF-8 hu_HU hu_HU.UTF-8
+# dpkg-reconfigure locales

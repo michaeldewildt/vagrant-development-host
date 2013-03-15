@@ -15,5 +15,14 @@ class php {
   package { 'php-apc': }
   package { 'php5-fpm': }
 
+   //TODO: remove file!  
+   file { "/home/local.example.com/index.php":
+     ensure => present,
+     source => "puppet:///modules/php/index.php"
+     
+   
+   }
+  
+
 }
 

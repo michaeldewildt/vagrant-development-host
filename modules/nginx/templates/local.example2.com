@@ -4,7 +4,7 @@ server {
 
         root   /home/local.example.com/webroot/;
 
-        inder  index.php index.html;
+        index index.php index.html;
         error_log /var/log/nginx/local.example2.com.error.log;
         access_log /var/log/nginx/local.example2.com.access.log;
 
