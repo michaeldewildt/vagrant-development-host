@@ -4,6 +4,7 @@ class php {
 
   Package { ensure => "installed" }
 
+  package { "php5-cli": }
   package { "php5-mysql": } 
   package { "php5-xdebug": }
   package { "php5-intl": }
