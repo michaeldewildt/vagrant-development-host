@@ -19,6 +19,15 @@ file { "/etc/nginx/sites-enabled/local.example.com":
   target => "/etc/nginx/sites-available/local.example.com",
 }
 
+file { "/etc/nginx/sites-available/local.example2.com":
+  content => template("nginx/local.example2.com"),
+}
+
+file { "/etc/nginx/sites-enabled/local.example2.com":
+  ensure => link,
+  target => "/etc/nginx/sites-available/local.example2.com",
+}
+
 file { "/etc/nginx/sites-enabled/default": 
   ensure => absent 
 }
