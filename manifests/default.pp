@@ -51,7 +51,7 @@ include nginx
 
   exec {
     'restart_nginx':
-      command     => '/usr/sbin/service nginx restart',
+      command     => '/usr/sbin/service nginx reload',
       refreshonly => true,
       require => Service['nginx']
   }
