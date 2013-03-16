@@ -14,13 +14,13 @@ file { "/etc/nginx/sites-available/local.example.com":
   content => template("nginx/local.example.com"),
 }
 
+file { "/etc/nginx/sites-available/local.example2.com":
+  content => template("nginx/local.example2.com"),
+}
+
 file { "/etc/nginx/sites-enabled/local.example.com":
   ensure => link,
   target => "/etc/nginx/sites-available/local.example.com",
-}
-
-file { "/etc/nginx/sites-available/local.example2.com":
-  content => template("nginx/local.example2.com"),
 }
 
 file { "/etc/nginx/sites-enabled/local.example2.com":
@@ -32,22 +32,10 @@ file { "/etc/nginx/sites-enabled/default":
   ensure => absent 
 }
 
-#Created by vagrant shared folder
-#file { "/home/local.example.com":
-#    ensure => "directory",
-#}
-
 service { "nginx":
   ensure => running,
 }
 
 include mysql
 include php
-
-
-# Set locale
-exec { '/usr/sbin/locale-gen en_US en_US.UTF-8 hu_HU hu_HU.UTF-8': 
-}
-
-exec { '/usr/sbin/dpkg-reconfigure locales': 
-}
+include locale
