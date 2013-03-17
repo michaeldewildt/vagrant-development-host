@@ -9,8 +9,6 @@ package { "git": }
 package { "sqlite": }
 package { 'memcached': }
 
-#package { 'mongodb-10gen': }
-
   
 file {  "/etc/nginx/sites-enabled/default":
   ensure => absent,
@@ -51,15 +49,18 @@ file { "/etc/nginx/sites-enabled/local.example2.com":
   before => File['/etc/nginx/sites-enabled/default'],
 }
 
+
 include mysql
 include php
 include locale
 include nginx
+include mongodb
 
-  exec {
-    'reload_nginx':
-      command     => '/usr/sbin/service nginx reload',
-      refreshonly => true,
-      require => Service['nginx']
-  }
+exec {
+  'reload_nginx':
+  command     => '/usr/sbin/service nginx reload',
+  refreshonly => true,
+  require => Service['nginx']
+}
 
+Exec["apt-get update"] -> Package <| |>
