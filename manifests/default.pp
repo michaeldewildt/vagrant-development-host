@@ -55,6 +55,7 @@ include php
 include locale
 include nginx
 include mongodb
+include redis-server
 
 exec {
   'reload_nginx':
