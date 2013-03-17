@@ -9,10 +9,12 @@ package { "git": }
 package { "sqlite": }
 package { 'memcached': }
 
+#package { 'mongodb-10gen': }
+
   
-file {  "/etc/nginx/sites-available/default":
+file {  "/etc/nginx/sites-enabled/default":
   ensure => absent,
-  notify  => Service['nginx'],
+  notify  => Exec['reload_nginx'],
 } 
 
 file { "/home/local.example2.com":
@@ -29,19 +31,24 @@ file { "/home/local.example.com":
 
 file { "/etc/nginx/sites-available/local.example.com":
   content => template("nginx/symfony2.erb"),
-  notify  => Exec['restart_nginx'],
-  before => File["/etc/nginx/sites-available/default"],
+  before => File["/etc/nginx/sites-enabled/default"],
 }
 
 file { "/etc/nginx/sites-available/local.example2.com":
   content => template("nginx/lithium.erb"),
-  notify  => Exec['restart_nginx'],
-  before => File['/etc/nginx/sites-available/default'],
+  before => File['/etc/nginx/sites-enabled/default'],
 }
 
 file { "/etc/nginx/sites-enabled/local.example.com":
   ensure => link,
   target => "/etc/nginx/sites-available/local.example.com",
+  before => File['/etc/nginx/sites-enabled/default'],
+}
+
+file { "/etc/nginx/sites-enabled/local.example2.com":
+  ensure => link,
+  target => "/etc/nginx/sites-available/local.example2.com",
+  before => File['/etc/nginx/sites-enabled/default'],
 }
 
 include mysql
@@ -50,7 +57,7 @@ include locale
 include nginx
 
   exec {
-    'restart_nginx':
+    'reload_nginx':
       command     => '/usr/sbin/service nginx reload',
       refreshonly => true,
       require => Service['nginx']
