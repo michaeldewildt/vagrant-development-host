@@ -13,9 +13,11 @@ class mongodb {
     before => Exec['add_key_for_mongodb'],
   }
   
-#  service { 'mongodb':
-#    ensure     => running,
-#    enable     => true,
-#  }  
+  file { "/etc/php5/conf.d/20-mongo.ini":
+    ensure => link,
+    target => "/etc/php5/mods-available/mongo.ini",
+  }
+  
+  Package <| |> -> File["/etc/php5/conf.d/20-mongo.ini"]
   
 }  
