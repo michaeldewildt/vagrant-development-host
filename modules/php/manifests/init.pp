@@ -19,6 +19,7 @@ class php {
   service { 'php5-fpm':
     ensure     => running,
     enable     => true,
+    require => Package['php5-fpm'],
   }  
 
   file { "/etc/php5/fpm/php.ini":
