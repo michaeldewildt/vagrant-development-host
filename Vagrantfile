@@ -38,31 +38,11 @@ Vagrant::Config.run do |config|
   config.vm.share_folder( "local.example2.com", "../local.example2.com", "/Users/pawelgraczyk/Workspaces/php/lithium/local.example2.com", :owner => "www-data", :group => "www-data", :create=> true)
   config.vm.share_folder( "local.example.com", "../local.example.com", "/Users/pawelgraczyk/Workspaces/php/sf2/local.example.com", :owner => "www-data", :group => "www-data", :create=> true)
 
-  # Enable provisioning with Puppet stand alone.  Puppet manifests
-  # Enable provisioning with Puppet stand alone.  Puppet manifests
-  # are contained in a directory path relative to this Vagrantfile.
-  # You will need to create the manifests directory and a manifest in
-  # the file base.pp in the manifests_path directory.
-  #
-  # An example Puppet manifest to provision the message of the day:
-  #
-  # # group { "puppet":
-  # #   ensure => "present",
-  # # }
-  # #
-  # # File { owner => 0, group => 0, mode => 0644 }
-  # #
-  # # file { '/etc/motd':
-  # #   content => "Welcome to your Vagrant-built virtual machine!
-  # #               Managed by Puppet.\n"
-  # # }
-  #
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = "manifests"
     puppet.manifest_file  = "default.pp"
     puppet.module_path = "modules"
   end
-
 
   # and the path to the validation key (relative to this Vagrantfile).
   #
