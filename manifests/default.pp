@@ -57,6 +57,10 @@ include nginx
 include mongodb
 include redis-server
 
+#TODO: configure nagios
+# apt-get install nagios3 nginx fcgiwrap
+
+
 exec {
   'reload_nginx':
   command     => '/usr/sbin/service nginx reload',
