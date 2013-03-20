@@ -37,30 +37,8 @@ Vagrant::Config.run do |config|
   # folder, and the third is the path on the host to the actual folder.
   config.vm.share_folder( "local.example2.com", "../local.example2.com", "/Users/pawelgraczyk/Workspaces/php/lithium/local.example2.com", :owner => "www-data", :group => "www-data", :create=> true)
   config.vm.share_folder( "local.example.com", "../local.example.com", "/Users/pawelgraczyk/Workspaces/php/sf2/local.example.com", :owner => "www-data", :group => "www-data", :create=> true)
-
   config.vm.share_folder( "local.example3.com", "../local.example3.com", "/Users/pawelgraczyk/Workspaces/php/sf2/local.example3.com", :owner => "www-data", :group => "www-data", :create=> true)
 
-  config.vm.provision :puppet do |puppet|
-    puppet.manifests_path = "manifests"
-    puppet.manifest_file  = "default.pp"
-    puppet.module_path = "modules"
-  end
-
-  # and the path to the validation key (relative to this Vagrantfile).
-  #
-  # The Opscode Platform uses HTTPS. Substitute your organization for
-  # ORGNAME in the URL and validation key.
-  #
-  # If you have your own Chef Server, use the appropriate URL, which may be
-  # HTTP instead of HTTPS depending on your configuration. Also change the
-  # validation key to validation.pem.
-  #
-  # config.vm.provision :chef_client do |chef|
-  #   chef.chef_server_url = "https://api.opscode.com/organizations/ORGNAME"
-  #   chef.validation_key_path = "ORGNAME-validator.pem"
-  # end
-  #
-  # If you're using the Opscode platform, your validator client is
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = "manifests"
     puppet.manifest_file  = "default.pp"
