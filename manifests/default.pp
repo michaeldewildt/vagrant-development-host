@@ -15,15 +15,21 @@ file {  "/etc/nginx/sites-enabled/default":
   notify  => Exec['reload_nginx'],
 } 
 
+file { "/home/local.example.com":
+   ensure => directory,
+   before => File ['/etc/nginx/sites-available/local.example.com'],
+   require => Package["nginx"],
+}
+
 file { "/home/local.example2.com":
    ensure => directory,
    before => File ['/etc/nginx/sites-available/local.example2.com'],
    require => Package["nginx"],
 }
 
-file { "/home/local.example.com":
+file { "/home/local.example3.com":
    ensure => directory,
-   before => File ['/etc/nginx/sites-available/local.example.com'],
+   before => File ['/etc/nginx/sites-available/local.example3.com'],
    require => Package["nginx"],
 }
 
@@ -34,6 +40,11 @@ file { "/etc/nginx/sites-available/local.example.com":
 
 file { "/etc/nginx/sites-available/local.example2.com":
   content => template("nginx/lithium.erb"),
+  before => File['/etc/nginx/sites-enabled/default'],
+}
+
+file { "/etc/nginx/sites-available/local.example3.com":
+  content => template("nginx/default.erb"),
   before => File['/etc/nginx/sites-enabled/default'],
 }
 
@@ -49,6 +60,11 @@ file { "/etc/nginx/sites-enabled/local.example2.com":
   before => File['/etc/nginx/sites-enabled/default'],
 }
 
+file { "/etc/nginx/sites-enabled/local.example3.com":
+  ensure => link,
+  target => "/etc/nginx/sites-available/local.example3.com",
+  before => File['/etc/nginx/sites-enabled/default'],
+}
 
 include mysql
 include php
@@ -59,7 +75,6 @@ include redis-server
 
 #TODO: configure nagios
 # apt-get install nagios3 nginx fcgiwrap
-
 
 exec {
   'reload_nginx':
@@ -79,3 +94,8 @@ file { '/etc/motd':
    content => "Welcome to your Vagrant-built virtual machine!
               Managed by Puppet.\n"
 }
+
+#user { "www-data":
+#  ensure     => "present",
+#  managehome => true,
+#}
