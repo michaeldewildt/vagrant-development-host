@@ -15,55 +15,20 @@ file {  "/etc/nginx/sites-enabled/default":
   notify  => Exec['reload_nginx'],
 } 
 
-file { "/home/local.example.com":
-   ensure => directory,
-   before => File ['/etc/nginx/sites-available/local.example.com'],
-   require => Package["nginx"],
+nginx::vhost { 'local.example.com':
+    framework => 'symfony2'
 }
 
-file { "/home/local.example2.com":
-   ensure => directory,
-   before => File ['/etc/nginx/sites-available/local.example2.com'],
-   require => Package["nginx"],
+nginx::vhost { 'local.example2.com':
+    framework => 'lithium'
 }
 
-file { "/home/local.example3.com":
-   ensure => directory,
-   before => File ['/etc/nginx/sites-available/local.example3.com'],
-   require => Package["nginx"],
+nginx::vhost { 'local.example3.com':
+    framework => 'default'
 }
 
-file { "/etc/nginx/sites-available/local.example.com":
-  content => template("nginx/symfony2.erb"),
-  before => File["/etc/nginx/sites-enabled/default"],
-}
-
-file { "/etc/nginx/sites-available/local.example2.com":
-  content => template("nginx/lithium.erb"),
-  before => File['/etc/nginx/sites-enabled/default'],
-}
-
-file { "/etc/nginx/sites-available/local.example3.com":
-  content => template("nginx/default.erb"),
-  before => File['/etc/nginx/sites-enabled/default'],
-}
-
-file { "/etc/nginx/sites-enabled/local.example.com":
-  ensure => link,
-  target => "/etc/nginx/sites-available/local.example.com",
-  before => File['/etc/nginx/sites-enabled/default'],
-}
-
-file { "/etc/nginx/sites-enabled/local.example2.com":
-  ensure => link,
-  target => "/etc/nginx/sites-available/local.example2.com",
-  before => File['/etc/nginx/sites-enabled/default'],
-}
-
-file { "/etc/nginx/sites-enabled/local.example3.com":
-  ensure => link,
-  target => "/etc/nginx/sites-available/local.example3.com",
-  before => File['/etc/nginx/sites-enabled/default'],
+nginx::vhost { 'local.parku.ch':
+    framework => 'symfony2'
 }
 
 include mysql

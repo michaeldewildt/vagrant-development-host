@@ -1,28 +1,29 @@
 server {
-        listen   80;
-        server_name local.example3.com;
 
-        root   /home/local.example3.com/;
+  listen   80;
+  server_name <%= @name %>;
 
-        index index.php index.html;
-        error_log /var/log/nginx/local.example3.com.error.log;
-        access_log /var/log/nginx/local.example3.com.access.log;
+  root   /home/<%= @name %>/;
 
-        try_files $uri $uri/ /index.php?$args;
+  index index.php index.html;
+  error_log /var/log/nginx/<%= @name %>.error.log;
+  access_log /var/log/nginx/<%= @name %>.access.log;
 
-        location ~ \.php$
-        {
-        #Uncomment on production to ensure security!
-                try_files $uri =404;
-                fastcgi_split_path_info ^(.+\.php)(/.+)$;
-                fastcgi_pass unix:/var/run/php5-fpm.sock;
-                fastcgi_index index.php;
-                include fastcgi_params;
-                fastcgi_param PATH_INFO $fastcgi_path_info;
-                fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
-        }
+  try_files $uri $uri/ /index.php?$args;
 
-        location ~ /\.ht {
-                deny all;
-        }
+  location ~ \.php$ {
+    # Uncomment on production to ensure security!
+    try_files $uri =404;
+    fastcgi_split_path_info ^(.+\.php)(/.+)$;
+    fastcgi_pass unix:/var/run/php5-fpm.sock;
+    fastcgi_index index.php;
+    include fastcgi_params;
+    fastcgi_param PATH_INFO $fastcgi_path_info;
+    fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
+  }
+
+  location ~ /\.ht {
+    deny all;
+  }
+        
 }

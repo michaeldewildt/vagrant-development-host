@@ -1,12 +1,12 @@
 server {
         listen   80;
-        server_name local.example2.com;
+        server_name <%= @name %>;
 
-        root   /home/local.example2.com/app/webroot;
+        root   /home/<%= @name %>/app/webroot;
 
         index index.php index.html;
-        error_log /var/log/nginx/local.example2.com.error.log;
-        access_log /var/log/nginx/local.example2.com.access.log;
+        error_log /var/log/nginx/<%= @name %>.error.log;
+        access_log /var/log/nginx/<%= @name %>.access.log;
 
         try_files $uri $uri/ /index.php?$args;
 
