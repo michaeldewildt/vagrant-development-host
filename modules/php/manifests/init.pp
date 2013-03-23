@@ -15,6 +15,7 @@ class php {
   package { "php5-mysql": } 
   package { 'php5-sqlite': }
   package { "php5-xdebug": }
+  package { "php5-curl": }
   
   service { 'php5-fpm':
     ensure     => running,

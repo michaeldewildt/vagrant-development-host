@@ -35,9 +35,11 @@ Vagrant::Config.run do |config|
   # Share an additional folder to the guest VM. The first argument is
   # an identifier, the second is the path on the guest to mount the
   # folder, and the third is the path on the host to the actual folder.
-  config.vm.share_folder( "local.example2.com", "../local.example2.com", "/Users/pawelgraczyk/Workspaces/php/lithium/local.example2.com", :owner => "www-data", :group => "www-data", :create=> true)
   config.vm.share_folder( "local.example.com", "../local.example.com", "/Users/pawelgraczyk/Workspaces/php/sf2/local.example.com", :owner => "www-data", :group => "www-data", :create=> true)
+  config.vm.share_folder( "local.example2.com", "../local.example2.com", "/Users/pawelgraczyk/Workspaces/php/lithium/local.example2.com", :owner => "www-data", :group => "www-data", :create=> true)
   config.vm.share_folder( "local.example3.com", "../local.example3.com", "/Users/pawelgraczyk/Workspaces/php/sf2/local.example3.com", :owner => "www-data", :group => "www-data", :create=> true)
+  config.vm.share_folder( "local.parku.ch", "../local.parku.ch", "/Users/pawelgraczyk/Workspaces/php/sf2/local.parku.ch", :owner => "www-data", :group => "www-data", :create=> true)
+  config.vm.share_folder( "local.remind-about.com", "../local.remind-about.com", "/Users/pawelgraczyk/Workspaces/php/sf2/local.remind-about.com", :owner => "www-data", :group => "www-data", :create=> true)
 
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = "manifests"

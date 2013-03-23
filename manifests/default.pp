@@ -31,6 +31,10 @@ nginx::vhost { 'local.parku.ch':
     framework => 'symfony2'
 }
 
+nginx::vhost { 'local.remind-about.com':
+    framework => 'symfony2'
+}
+
 include mysql
 include php
 include locale
