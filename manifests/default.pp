@@ -31,7 +31,7 @@ nginx::vhost { 'local.parku.ch':
     framework => 'symfony2'
 }
 
-nginx::vhost { 'local.lagacy-parku.ch':
+nginx::vhost { 'local.legacy-parku.ch':
     framework => 'symfony2'
 }
 
