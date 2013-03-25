@@ -39,6 +39,7 @@ Vagrant::Config.run do |config|
   config.vm.share_folder( "local.example2.com", "../local.example2.com", "/Users/pawelgraczyk/Workspaces/php/lithium/local.example2.com", :owner => "www-data", :group => "www-data", :create=> true)
   config.vm.share_folder( "local.example3.com", "../local.example3.com", "/Users/pawelgraczyk/Workspaces/php/sf2/local.example3.com", :owner => "www-data", :group => "www-data", :create=> true)
   config.vm.share_folder( "local.parku.ch", "../local.parku.ch", "/Users/pawelgraczyk/Workspaces/php/sf2/local.parku.ch", :owner => "www-data", :group => "www-data", :create=> true)
+  config.vm.share_folder( "local.legacy-parku.ch", "../local.legacy-parku.ch", "/Users/pawelgraczyk/Workspaces/php/sf2/local.legacy-parku.ch", :owner => "www-data", :group => "www-data", :create=> true)
   config.vm.share_folder( "local.remind-about.com", "../local.remind-about.com", "/Users/pawelgraczyk/Workspaces/php/sf2/local.remind-about.com", :owner => "www-data", :group => "www-data", :create=> true)
 
   config.vm.provision :puppet do |puppet|

@@ -31,6 +31,10 @@ nginx::vhost { 'local.parku.ch':
     framework => 'symfony2'
 }
 
+nginx::vhost { 'local.lagacy-parku.ch':
+    framework => 'symfony2'
+}
+
 nginx::vhost { 'local.remind-about.com':
     framework => 'symfony2'
 }
@@ -64,7 +68,7 @@ file { '/etc/motd':
               Managed by Puppet.\n"
 }
 
-#user { "www-data":
-#  ensure     => "present",
-#  managehome => true,
-#}
+user { "www-data":
+  ensure     => "present",
+  managehome => true,
+}
