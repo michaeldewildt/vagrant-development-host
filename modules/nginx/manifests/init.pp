@@ -13,5 +13,7 @@ class nginx {
     restart    => '/etc/init.d/nginx reload'
   }
 
+  $is_local_deploy = 'false'
+
 }
 

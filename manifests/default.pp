@@ -4,11 +4,15 @@ exec { 'apt-get update':
 
 Package { ensure => "installed" }
 
-package { "varnish": }
+#package { "varnish": }
 package { "git": }
-package { "sqlite": }
-package { 'memcached': }
+#package { "sqlite": }
+#package { 'memcached': }
+package { 'curl': }
 
+file { "/home/capifony":
+    ensure => "directory",
+}
   
 file {  "/etc/nginx/sites-enabled/default":
   ensure => absent,
@@ -16,7 +20,7 @@ file {  "/etc/nginx/sites-enabled/default":
 } 
 
 nginx::vhost { 'local.example.com':
-    framework => 'symfony2'
+    framework => 'symfony2',
 }
 
 nginx::vhost { 'local.example2.com':
@@ -29,6 +33,11 @@ nginx::vhost { 'local.example3.com':
 
 nginx::vhost { 'local.parku.ch':
     framework => 'symfony2'
+}
+
+nginx::vhost { 'local.deployment-parku.ch':
+    framework => 'symfony2',
+    is_local_deploy => 'true'
 }
 
 nginx::vhost { 'local.legacy-parku.ch':
@@ -45,6 +54,7 @@ include locale
 include nginx
 include mongodb
 include redis-server
+include acl
 
 #TODO: configure nagios
 # apt-get install nagios3 nginx fcgiwrap
