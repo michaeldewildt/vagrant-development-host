@@ -12,6 +12,8 @@ package { 'curl': }
 
 file { "/home/capifony":
     ensure => "directory",
+    owner  => "www-data",
+    group  => "www-data",
 }
   
 file {  "/etc/nginx/sites-enabled/default":
