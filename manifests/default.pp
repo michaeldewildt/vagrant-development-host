@@ -9,6 +9,7 @@ package { "git": }
 #package { "sqlite": }
 #package { 'memcached': }
 package { 'curl': }
+package { 'mc': }
 
 file { "/home/capifony":
     ensure => "directory",
