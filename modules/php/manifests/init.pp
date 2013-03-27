@@ -27,7 +27,7 @@ class php {
   file { "/etc/php5/fpm/php.ini":
     source => 'puppet:///modules/php/php.ini',
   }
-
+  #TODO: change www-data to vagrant for www.conf in pool.
   exec { 'reload_php5-fpm':
     command     => '/usr/sbin/service php5-fpm reload',
     require => Service['php5-fpm']
