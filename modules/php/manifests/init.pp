@@ -30,6 +30,7 @@ class php {
 
   file { "/etc/php5/fpm/pool.d/www.conf":
     source => 'puppet:///modules/php/www.conf',
+    require => Service['php5-fpm']
   }
 
   exec { 'reload_php5-fpm':
