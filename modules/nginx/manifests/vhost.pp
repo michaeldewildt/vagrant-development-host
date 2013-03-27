@@ -17,8 +17,8 @@ define nginx::vhost(
        ensure => directory,
        before => File ["/etc/nginx/sites-available/${name}"],       
        require => Package["nginx"],
-       owner  => "www-data",
-       group  => "www-data",
+       owner  => "vagrant",
+       group  => "vagrant",
     }
 
     file { "/home/${name}":
@@ -26,27 +26,9 @@ define nginx::vhost(
        before => File ["/etc/nginx/sites-available/${name}"],       
        require => Package["nginx"],
        target => "/home/capifony/${name}/current",
-       owner  => "www-data",
-       group  => "www-data",
+       owner  => "vagrant",
+       group  => "vagrant",
     }
-    #TODO: set permission on acl for  vagrant.vegrant
-    #setfacl -m g:vagrant:rwx - adds new group 'vagrant' to root directory it enables deployment
-#    exec {
-#      'setfacl_r':
-#      command  => "setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX /home/capifony/${name}",
-#      path => '/bin/',
-#      before => Exec['setfacl_rd']
-#    }
-
-#    exec {
-#      'setfacl_rd':
-#      command  => "setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx /home/capifony/${name}",
-#      path => '/bin/',
-#      before => File ["/etc/nginx/sites-available/${name}"]
-#    }
-
-    #File["/home/capifony/${name}"] -> 
-    #Exec['mount_o_and_remount_root'] -> Exec['setfacl_r'] -> Exec['setfacl_rd']
   }
    
   file { "/etc/nginx/sites-available/${name}":

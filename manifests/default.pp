@@ -12,8 +12,8 @@ package { 'curl': }
 
 file { "/home/capifony":
     ensure => "directory",
-    owner  => "www-data",
-    group  => "www-data",
+    owner  => "vagrant",
+    group  => "vagrant",
 }
   
 file {  "/etc/nginx/sites-enabled/default":
@@ -80,7 +80,3 @@ file { '/etc/motd':
               Managed by Puppet.\n"
 }
 
-user { "www-data":
-  ensure     => "present",
-  managehome => true,
-}
