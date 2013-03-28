@@ -22,15 +22,15 @@ class elasticsearch {
   }
 
   exec { 'untar_elasticsearch':
-    command => 'tar xfz /vagrant/elasticsearch-0.20.6.tar.gz -C /vagrant/elasticsearch-0.20.6',
+    command => 'tar xfz /vagrant/elasticsearch-0.20.6.tar.gz -C /vagrant',
     path => '/bin/'
   }
 
   exec {'elasticsearch_run':
-    command => 'elasticsearch &',
-    path => '/vagrant/elasticsearch-0.20.6/bin/'
+    command => 'nohup elasticsearch > /dev/null 2>&1 &',
+    path => '/vagrant/elasticsearch-0.20.6/bin/:/usr/bin/'
   }
  
-  Package['update-sun-jre'] -> Exec['wget_for_elasticsearch'] -> Exec['untar_elasticsearch']
+  Package['update-sun-jre'] -> Exec['wget_for_elasticsearch'] -> Exec['untar_elasticsearch'] -> Exec['elasticsearch_run']
 }
 

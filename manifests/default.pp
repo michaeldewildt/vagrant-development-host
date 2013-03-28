@@ -10,6 +10,7 @@ package { "git": }
 #package { 'memcached': }
 package { 'curl': }
 package { 'htop': }
+package { 'screen': }
 
 file { "/home/capifony":
     ensure => "directory",
