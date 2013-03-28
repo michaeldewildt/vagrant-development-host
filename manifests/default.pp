@@ -9,6 +9,7 @@ package { "git": }
 #package { "sqlite": }
 #package { 'memcached': }
 package { 'curl': }
+package { 'htop': }
 
 file { "/home/capifony":
     ensure => "directory",
@@ -57,6 +58,8 @@ include nginx
 include mongodb
 include redis-server
 include acl
+include elasticsearch 
+include update-sun-jre
 
 #TODO: configure nagios
 # apt-get install nagios3 nginx fcgiwrap
