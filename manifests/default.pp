@@ -4,12 +4,14 @@ exec { 'apt-get update':
 
 Package { ensure => "installed" }
 
-#package { "varnish": }
+package { "varnish": }
 package { "git": }
-#package { "sqlite": }
-#package { 'memcached': }
+package { "sqlite": }
+package { 'memcached': }
 package { 'curl': }
 package { 'mc': }
+package { 'htop': }
+package { 'screen': }
 
 file { "/home/capifony":
     ensure => "directory",
@@ -58,6 +60,8 @@ include nginx
 include mongodb
 include redis-server
 include acl
+include elasticsearch 
+include update-sun-jre
 
 #TODO: configure nagios
 # apt-get install nagios3 nginx fcgiwrap
