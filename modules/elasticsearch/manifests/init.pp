@@ -26,11 +26,16 @@ class elasticsearch {
     path => '/bin/'
   }
 
+  exec { 'elasticsearch_remove_installation_files':
+    command => 'rm /vagrant/elasticsearch-0.20.6.tar.gz',
+    path => '/bin/'
+  }
+
   exec {'elasticsearch_run':
     command => 'nohup elasticsearch > /dev/null 2>&1 &',
     path => '/vagrant/elasticsearch-0.20.6/bin/:/usr/bin/'
   }
  
-  Package['update-sun-jre'] -> Exec['wget_for_elasticsearch'] -> Exec['untar_elasticsearch'] -> Exec['elasticsearch_run']
+  Package['update-sun-jre'] -> Exec['wget_for_elasticsearch'] -> Exec['untar_elasticsearch'] -> Exec['elasticsearch_remove_installation_files'] -> Exec['elasticsearch_run']
 }
 
