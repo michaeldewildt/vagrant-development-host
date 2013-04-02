@@ -9,6 +9,8 @@ server {
   error_log /var/log/nginx/<%= @name %>.error.log;
   access_log /var/log/nginx/<%= @name %>.access.log;
 
+  sendfile off;
+
   try_files $uri $uri/ /index.php?$args;
 
   location ~ \.php$ {
