@@ -18,53 +18,20 @@ file { "/home/capifony":
     owner  => "vagrant",
     group  => "vagrant",
 }
-  
+
 file {  "/etc/nginx/sites-enabled/default":
   ensure => absent,
   notify  => Exec['reload_nginx'],
-} 
-
-nginx::vhost { 'local.example.com':
-    framework => 'symfony2',
 }
 
-nginx::vhost { 'local.example2.com':
-    framework => 'lithium'
-}
-
-nginx::vhost { 'local.example3.com':
-    framework => 'default'
-}
-
-nginx::vhost { 'local.parku.ch':
-    framework => 'symfony2'
-}
-
-nginx::vhost { 'local.deployment-parku.ch':
-    framework => 'symfony2',
-    is_local_deploy => 'true'
-}
-
-nginx::vhost { 'local.legacy-parku.ch':
-    framework => 'symfony2'
-}
-
-nginx::vhost { 'local.remind-about.com':
-    framework => 'symfony2'
+nginx::vhost { 'wpb2d':
+    framework => 'symfony2-dev',
 }
 
 include mysql
 include php
 include locale
 include nginx
-include mongodb
-include redis-server
-include acl
-include elasticsearch 
-include update-sun-jre
-
-#TODO: configure nagios
-# apt-get install nagios3 nginx fcgiwrap
 
 exec {
   'reload_nginx':
